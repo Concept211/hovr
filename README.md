@@ -15,7 +15,7 @@ $('img[data-hovr]').hovr();
 ```
 
 <br />
-TimThumb Integration
+**TimThumb Integration**
 ```
 $('img.hovr').hovr({
 	timThumb: true,
@@ -27,7 +27,7 @@ $('img.hovr').hovr({
 ```
 
 <br />
-Complete Options
+**Complete Options**
 ```
 $('img.hovr').hovr({
 	speed:           'normal',
@@ -40,3 +40,7 @@ $('img.hovr').hovr({
 	//http://www.binarymoon.co.uk/2012/02/complete-timthumb-parameters-guide/
 });
 ```
+
+Demo
+----
+<a href="http://concept211.com/hovr/demo.html" target="_blank">Online Demo</a>
