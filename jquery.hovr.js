@@ -1,12 +1,12 @@
 /*
-jQuery Hovr v1.0
-07/20/2013
+jQuery Hovr v1.1
+09/12/2013
 ------------------
 Pablo D. Carrau
 www.concept211.com
 */
 (function($){
-  $.fn.hovr = function(options) {
+	$.fn.hovr = function(options) {
 
 		// Default Options
 		var defaults = {
@@ -24,20 +24,21 @@ www.concept211.com
 		// Create Images
 		if (options.timThumb) {
 			this.each(function() {
-				var strOrig = $(this).prop('src');
-				var strNew  = options.timThumbPath + 
+				var $this = $(this),
+					strOrig = $this.prop('src'),
+					strNew  = options.timThumbPath + 
 					'?src=' + strOrig + 
-					'&w=' + $(this).prop('width') + 
-					'&h=' + $(this).prop('height') + 
+					'&w=' + $this.prop('width') + 
+					'&h=' + $this.prop('height') + 
 					'&' + options.timThumbParams;
 
 				if (options.timThumbInverse) {
-					$(this)
+					$this
 						.prop('src', strOrig)
 						.attr('data-hovr', strNew);
 				}
 				else {
-					$(this)
+					$this
 						.prop('src', strNew)
 						.attr('data-hovr', strOrig);
 				}
@@ -54,28 +55,26 @@ www.concept211.com
 					$(this).stop().animate(options.animateOut, options.speed);
 				}
 			).each(function() {
-				var intWidth  = ($(this).attr('width'))  ? $(this).attr('width')  : $(this).prop('width');
-				var intHeight = ($(this).attr('height')) ? $(this).attr('height') : $(this).prop('height');
-				var strAlign  = ($(this).attr('align'))  ? $(this).attr('align')  : '';
-				var strClass  = ($(this).attr('class'))  ? $(this).attr('class')  : '';
-				var strStyle  = ($(this).attr('style'))  ? $(this).attr('style')  : '';
+				var $this = $(this),
+					intWidth  = ($this.attr('width'))  ? $this.attr('width')  : $this.prop('width'),
+					intHeight = ($this.attr('height')) ? $this.attr('height') : $this.prop('height'),
+					strAlign  = ($this.attr('align'))  ? $this.attr('align')  : '',
+					strClass  = ($this.attr('class'))  ? $this.attr('class')  : '',
+					strStyle  = ($this.attr('style'))  ? $this.attr('style')  : '';
 
-				$(this).wrap('<div class="' + strClass + '" style="position:relative; display:inline-block; ' + 
+				$this.wrap('<div class="' + strClass + '" style="position:relative; display:inline-block; ' + 
 					'width:' + intWidth + 'px; height:' + intHeight + 'px; ' + 
 					'float:' + strAlign + '; ' + strStyle + '"></div>');
 
-				$(this).before($(this).clone(true))
+				$this.before($this.clone(true))
 					.attr('style', 'position:absolute; left:auto; top:auto;')
-					.prop('src', $(this).attr('data-hovr'))
-					.removeAttr('data-hovr')
-					.removeAttr('class');
+					.prop('src', $this.attr('data-hovr'))
+					.removeAttr('data-hovr class');
 
-				$(this).prev('img')
+				$this.prev('img')
 					.attr('style', 'position:absolute; left:auto; top:auto; z-index:10;')
-					.removeAttr('data-hovr')
-					.removeAttr('class');
+					.removeAttr('data-hovr class');
 			});
 		});
-
 	};
 })(jQuery);
